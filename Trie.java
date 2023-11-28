@@ -25,6 +25,14 @@ public class Trie {
          return data;
       }
 
+      public ArrayList<String> getChildren() {
+         final ArrayList<String> ch = new ArrayList<String>();
+         for (final Node c : children) {
+            ch.add(c.getData());
+         }
+         return ch;
+      }
+
       public boolean isWord() {
          return isWord;
       }
@@ -75,6 +83,22 @@ public class Trie {
          child = parentNode.children.get(ind);
       }
       trieBuilder(toAdd.substring(1), child);
+   }
+
+   public ArrayList<String> getChildren(final String key) {
+      Node curr = head;
+      return childRecur(key, head);
+   }
+
+   private ArrayList<String> childRecur(final String key, final Node curr) {
+      if (key.length() == 0) {
+         return curr.getChildren();
+      }
+      final int ind = curr.children.indexOf(key.substring(0,1));
+      if (ind == -1) {
+         return new ArrayList<String>();
+      }
+      return childRecur(key.substring(1), curr.children.get(ind));
    }
 
    public boolean search(final String query) {
