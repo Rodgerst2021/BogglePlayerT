@@ -11,9 +11,9 @@ import java.util.Scanner;
 
 public class BogglePlayer {
 
+   final Trie dictionary;
    public BogglePlayer (final String wordFile) throws FileNotFoundException {
-      final File words = new File(wordFile);
-      final Scanner scn = new Scanner(words, "US-ASCII");
+      dictionary = new Trie(wordFile);
    }
 
    public Word[] getWords(final char[][] board) {
