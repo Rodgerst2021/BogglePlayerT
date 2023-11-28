@@ -5,9 +5,8 @@
 * Description: given a dictionary and a Boggle board, finds the 20 highest scoring words
  */
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.PriorityQueue;
 
 public class BogglePlayer {
 

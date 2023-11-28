@@ -37,7 +37,12 @@ public class Trie {
          isWord = siw;
       }
 
-      public boolean equals(final Node n) {
+      @Override
+      public boolean equals(final Object o) {
+         if (!(o instanceof Node)) {
+            return false;
+         }
+         final Node n = (Node) o;
          return data.equals(n.getData());
       }
    }
@@ -49,7 +54,7 @@ public class Trie {
       final Scanner scn = new Scanner(words, "US-ASCII");
       head = new Node("");
       while (scn.hasNextLine()) {
-         final String w = scn.nextLine();
+         final String w = scn.nextLine().toLowerCase();
          if (w.length() < 3 || w.length() > 16) {
             continue;
          }
@@ -77,13 +82,32 @@ public class Trie {
    }
 
    private boolean searchRecur(final String q, Node c) {
-      if (q.length() == 0 && c.isWord()) {
-         return true;
+      if (q.length() == 0) {
+         return c.isWord();
       }
       final int ind = c.children.indexOf(new Node(q.substring(0,1)));
       if (ind != -1) {
          return searchRecur(q.substring(1), c.children.get(ind));
       }
       return false;
+   }
+
+   public void printChildren() {
+      for (Node n : head.children) {
+         System.out.print(n.getData());
+      }
+      System.out.println();
+   }
+
+   /**
+    * FOR DEBUGGING PURPOSES ONLY
+    * @param args
+    * @throws FileNotFoundException
+    */
+   public static void main(final String[] args) throws FileNotFoundException {
+      final Trie test = new Trie(args[0]);
+      System.out.println("done building");
+      test.printChildren();
+      System.out.println(test.search("appl"));
    }
 }
