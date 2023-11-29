@@ -54,7 +54,7 @@ public class BogglePlayer {
     * @param b 2d array representing boggle board
     * @return heatmap of which letters have children near them
     */
-   private PriorityQueue<Entry> childScan(final char[][] b) {
+   private PriorityQueue<Entry> generateHeatMap(final char[][] b) {
       // priority queue that will key based on # of children
       final PriorityQueue<Entry> hm = new PriorityQueue<Entry>();
 
@@ -71,6 +71,7 @@ public class BogglePlayer {
       }
       return hm;
    }
+
 
 
 }
